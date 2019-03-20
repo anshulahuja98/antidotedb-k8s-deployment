@@ -1,0 +1,34 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: antidotedb-deployment
+spec:
+  selector:
+    matchLabels:
+      app: antidotedb
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: antidotedb
+    spec:
+      # restartPolicy: Always
+      containers:
+
+      - name: antidote1
+        image: antidotedb/antidote
+        ports:
+          - containerPort: 8087
+        env:
+           - name: POD_ID
+             valueFrom:
+              fieldRef:
+                fieldPath: status.podIP   
+           - name: NODE_NAME
+             value: antidote@$(POD_ID) 
+        # command: ["printenv"]
+        # args: ["MY_NODE_IP"]
+        
+
+  
+        
