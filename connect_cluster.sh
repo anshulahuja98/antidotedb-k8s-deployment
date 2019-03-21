@@ -6,10 +6,10 @@ mapfile -t POD_NAMES < <(kubectl get pods -l app=antidotedb -o yaml | grep name:
 echo "antidote_dc_manager:create_dc(['antidote@"${POD_IPS[0]}"']),
 rpc:call('antidote@"${POD_IPS[1]}"', antidote_dc_manager,create_dc, ['antidote@"${POD_IPS[1]}"']),
 {ok, MyDescriptor} = antidote_dc_manager:get_connection_descriptor(),
-{ok, RemoteDescriptor} = rpc:call('antidote@"${POD_IPS[0]}"', antidote_dc_manager,get_connection_descriptor, []),
+{ok, RemoteDescriptor} = rpc:call('antidote@"${POD_IPS[1]}"', antidote_dc_manager,get_connection_descriptor, []),
 Descriptors = [MyDescriptor, RemoteDescriptor],
 antidote_dc_manager:subscribe_updates_from(Descriptors),
-rpc:call('antidote@"${POD_IPS[0]}"', antidote_dc_manager,subscribe_updates_from, [Descriptors])." > connect-commands.txt
+rpc:call('antidote@"${POD_IPS[1]}"', antidote_dc_manager,subscribe_updates_from, [Descriptors])." > connect-commands.txt
 
 
 echo 'echo $(</var/connect-commands.txt) " " | /opt/antidote/erts-10.3/bin/to_erl /tmp/erl_pipes/antidote\@'${POD_IPS[0]}/'' > run_remote_shell.sh
