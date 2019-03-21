@@ -21,3 +21,4 @@ kubectl cp run_remote_shell.sh "${POD_NAMES[0]}":/var/
 
 
 
+kubectl exec -it "${POD_NAMES[0]}" bash /var/run_remote_shell.sh
