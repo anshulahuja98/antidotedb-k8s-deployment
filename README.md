@@ -20,7 +20,7 @@ Scripts for Kubernetes deployment of AntidoteDB
    ```
 1. Create the k8s deployment for antidote
     ```
-    kubectl apply -f  deployoment.yaml
+    kubectl apply -f  deployment.yaml
     ```
     > You can tweak the initial parameters for the deployment, for example changing the initial number of pods to be deployed by changing `spec > replicas` value in the yaml file
 1. Check the dashboard which was opened while running `minikube dashboard` 
@@ -35,6 +35,6 @@ Scripts for Kubernetes deployment of AntidoteDB
     ```    
     To open the bash shell only
     ```
-     kubectl exec -it  <pod-name> bash
+    kubectl exec -it  <pod-name> bash
     ```
     An easier option is to go the pods page on the minikube dashboard and click on `shell` to open the bash shell in the browser itself.
